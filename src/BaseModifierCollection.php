@@ -25,7 +25,7 @@ class BaseModifierCollection
     /**
      * @return ModifierInterface[]
      */
-    public function all() : array
+    public function all()
     {
         return $this->collection;
     }

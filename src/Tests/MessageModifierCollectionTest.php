@@ -2,9 +2,8 @@
 
 namespace Thruster\Component\HttpModifier\Tests;
 
-use Psr\Http\Message\MessageInterface;
 use Thruster\Component\HttpModifier\MessageModifierCollection;
-use Thruster\Component\HttpModifier\MessageModifierInterface;
+use Thruster\Component\HttpModifier\Tests\Modifiers\MessageModifier;
 
 /**
  * Class MessageModifierCollectionTest
@@ -27,12 +26,7 @@ class MessageModifierCollectionTest extends TestCase
      */
     public function getNewCollectionItem()
     {
-        return new class implements MessageModifierInterface {
-            public function modify(MessageInterface $Message) : MessageInterface
-            {
-                return $Message;
-            }
-        };
+        return $this->getMockForAbstractClass('\Thruster\Component\HttpModifier\MessageModifierInterface');
     }
 
     /**
@@ -48,6 +42,6 @@ class MessageModifierCollectionTest extends TestCase
      */
     public function getModifier()
     {
-        return $this->getNewCollectionItem();
+        return new MessageModifier();
     }
 }

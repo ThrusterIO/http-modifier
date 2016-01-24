@@ -2,9 +2,8 @@
 
 namespace Thruster\Component\HttpModifier\Tests;
 
-use Psr\Http\Message\ServerRequestInterface;
 use Thruster\Component\HttpModifier\ServerRequestModifierCollection;
-use Thruster\Component\HttpModifier\ServerRequestModifierInterface;
+use Thruster\Component\HttpModifier\Tests\Modifiers\ServerModifier;
 
 /**
  * Class ServerRequestModifierCollectionTest
@@ -27,12 +26,7 @@ class ServerRequestModifierCollectionTest extends TestCase
      */
     public function getNewCollectionItem()
     {
-        return new class implements ServerRequestModifierInterface {
-            public function modify(ServerRequestInterface $response) : ServerRequestInterface
-            {
-                return $response;
-            }
-        };
+        return $this->getMockForAbstractClass('\Thruster\Component\HttpModifier\ServerRequestModifierInterface');
     }
 
     /**
@@ -48,6 +42,6 @@ class ServerRequestModifierCollectionTest extends TestCase
      */
     public function getModifier()
     {
-        return $this->getNewCollectionItem();
+        return new ServerModifier();
     }
 }

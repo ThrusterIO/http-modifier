@@ -3,7 +3,6 @@
 namespace Thruster\Component\HttpModifier;
 
 use Psr\Http\Message\ResponseInterface;
-use Thruster\Component\HttpModifier\ResponseModifierInterface;
 
 /**
  * Class ResponseModifierCollection
@@ -11,7 +10,7 @@ use Thruster\Component\HttpModifier\ResponseModifierInterface;
  * @package Thruster\Component\HttpModifier
  * @author  Aurimas Niekis <aurimas@niekis.lt>
  */
-class ResponseModifierCollection extends BaseModifierCollection
+class ResponseModifierCollection extends BaseModifierCollection implements ResponseModifierInterface
 {
     /**
      * @param ResponseModifierInterface[] $modifiers
@@ -20,9 +19,9 @@ class ResponseModifierCollection extends BaseModifierCollection
     {
         parent::__construct();
 
-        $this->collection = (function (ResponseModifierInterface ...$modifiers) {
-            return $modifiers;
-        })(...$modifiers);
+        foreach ($modifiers as $modifier) {
+            $this->add($modifier);
+        }
     }
 
     /***
@@ -42,11 +41,11 @@ class ResponseModifierCollection extends BaseModifierCollection
      *
      * @return ResponseInterface
      */
-    public function modify(ResponseInterface $response) : ResponseInterface
+    public function modify(ResponseInterface $response)
     {
         /** @var ResponseModifierInterface $modifier */
         foreach ($this->collection as $modifier) {
-            $request = $modifier->modify($response);
+            $response = $modifier->modify($response);
         }
 
         return $response;

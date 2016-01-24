@@ -3,7 +3,6 @@
 namespace Thruster\Component\HttpModifier;
 
 use Psr\Http\Message\MessageInterface;
-use Thruster\Component\HttpModifier\MessageModifierInterface;
 
 /**
  * Class MessageModifierCollection
@@ -20,9 +19,9 @@ class MessageModifierCollection extends BaseModifierCollection implements Messag
     {
         parent::__construct();
 
-        $this->collection = (function (MessageModifierInterface ...$modifiers) {
-            return $modifiers;
-        })(...$modifiers);
+        foreach ($modifiers as $modifier) {
+            $this->add($modifier);
+        }
     }
 
     /***
@@ -42,7 +41,7 @@ class MessageModifierCollection extends BaseModifierCollection implements Messag
      *
      * @return MessageInterface
      */
-    public function modify(MessageInterface $message) : MessageInterface
+    public function modify(MessageInterface $message)
     {
         /** @var MessageModifierInterface $modifier */
         foreach ($this->collection as $modifier) {

@@ -4,11 +4,11 @@
 (https://github.com/ThrusterIO/http-modifier/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)]
 (LICENSE)
-[![Build Status](https://img.shields.io/travis/ThrusterIO/http-modifier.svg?style=flat-square)]
-(https://travis-ci.org/ThrusterIO/http-modifier)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/ThrusterIO/http-modifier.svg?style=flat-square)]
+[![Build Status](https://img.shields.io/travis/ThrusterIO/http-modifier/php5.svg?style=flat-square)]
+(https://travis-ci.org/ThrusterIO/http-modifier/php5)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/ThrusterIO/http-modifier/php5.svg?style=flat-square)]
 (https://scrutinizer-ci.com/g/ThrusterIO/http-modifier)
-[![Quality Score](https://img.shields.io/scrutinizer/g/ThrusterIO/http-modifier.svg?style=flat-square)]
+[![Quality Score](https://img.shields.io/scrutinizer/g/ThrusterIO/http-modifier/php5.svg?style=flat-square)]
 (https://scrutinizer-ci.com/g/ThrusterIO/http-modifier)
 [![Total Downloads](https://img.shields.io/packagist/dt/thruster/http-modifier.svg?style=flat-square)]
 (https://packagist.org/packages/thruster/http-modifier)
@@ -20,15 +20,9 @@ The Thruster HttpModifier Component. Provides a backbone for modifying PSR-7 Req
 
 ## Install
 
+For older PHP version than PHP7 use this branch **php5**
+
 Via Composer
-
-``` bash
-$ composer require thruster/http-modifier
-```
-
-### For PHP < 7.0
-
-For older PHP version than PHP7 there is branch **php5**
 
 ``` bash
 $ composer require thruster/http-modifier ">=1.0,<2.0"
@@ -48,12 +42,14 @@ Each of them has own Collection to group them and run `modify` on each of modifi
 ### Standalone modifier
 
 ```php
-$modifier = new class implements ResponseModifierInterface {
+class PoweredBy implements ResponseModifierInterface {
 	public function modify(ResponseInterface $response) : ResponseInterface
 	{
 		return $response->withHeader('X-Powered-By', 'Thruster/1.0');
 	}
 }
+
+$modifier = new PoweredBy();
 
 $response = $modifier->modify($response);
 ```

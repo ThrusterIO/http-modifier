@@ -12,5 +12,5 @@ use Psr\Http\Message\ResponseInterface;
  */
 interface ResponseModifierInterface extends ModifierInterface
 {
-    public function modify(ResponseInterface $response) : ResponseInterface;
+    public function modify(ResponseInterface $response);
 }

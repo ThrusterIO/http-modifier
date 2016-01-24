@@ -2,9 +2,8 @@
 
 namespace Thruster\Component\HttpModifier\Tests;
 
-use Psr\Http\Message\RequestInterface;
 use Thruster\Component\HttpModifier\RequestModifierCollection;
-use Thruster\Component\HttpModifier\RequestModifierInterface;
+use Thruster\Component\HttpModifier\Tests\Modifiers\RequestModifier;
 
 /**
  * Class RequestModifierCollectionTest
@@ -27,12 +26,7 @@ class RequestModifierCollectionTest extends TestCase
      */
     public function getNewCollectionItem()
     {
-        return new class implements RequestModifierInterface {
-            public function modify(RequestInterface $request) : RequestInterface
-            {
-                return $request;
-            }
-        };
+        return $this->getMockForAbstractClass('\Thruster\Component\HttpModifier\RequestModifierInterface');
     }
 
     /**
@@ -48,6 +42,6 @@ class RequestModifierCollectionTest extends TestCase
      */
     public function getModifier()
     {
-        return $this->getNewCollectionItem();
+        return new RequestModifier();
     }
 }
