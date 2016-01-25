@@ -18,6 +18,8 @@
 
 The Thruster HttpModifier Component. Provides a backbone for modifying PSR-7 Request/Response for HTTP Clients/Servers and other utilities which uses PSR-7 standard. 
 
+[Collection of Thruster Http Modifiers](https://github.com/ThrusterIO/http-modifiers)
+
 ## Install
 
 Via Composer
